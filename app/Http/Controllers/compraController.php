@@ -3,24 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\produto;
 
-class produtoController extends Controller
+class compraController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-       // header('Access-Control-Allow-Origin*','*');
-    }
-
     public function index()
     {
-        $produto = produto::all();
-        return response()->json($produto);
+        //
     }
 
     /**
@@ -28,7 +21,10 @@ class produtoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,13 +34,7 @@ class produtoController extends Controller
      */
     public function store(Request $request)
     {
-        $dados = $request->all();
-        $produto = produto::create($dados);
-        if ($produto) {
-            return response()->json(['data'=> $produto]);
-        } else {
-            return response()->json(['data'=>'Erro ao criar uma categoria']);
-        }
+        //
     }
 
     /**
@@ -55,13 +45,9 @@ class produtoController extends Controller
      */
     public function show($id)
     {
-        $produto = produto::find($id);
-        if ($produto) {
-            return response()->json(['data'=> $produto]);
-       } else {
-           return response()->json(['Erro ao achar esse produto ']);
-       }
+        //
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -82,16 +68,9 @@ class produtoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $produto = produto::find($id);
-        $dados = $request->all();
-        
-        if ($produto) {
-            $produto->update($dados);
-            return response()->json(['data'=>$produto]);
-        } else {
-            return response()->json(['data'=>'Erro ao editar esse produto']);
+        //
     }
-}
+
     /**
      * Remove the specified resource from storage.
      *
@@ -100,12 +79,6 @@ class produtoController extends Controller
      */
     public function destroy($id)
     {
-        $produto = produto::find($id);
-        if ($produto) {
-            $produto->delete();
-            return response()->json(['data'=>'Produto removida com sucesso']);
-        } else {
-            return response()->json(['data'=>'Não foi possivel remover produto']);
-        }
+        //
     }
 }
