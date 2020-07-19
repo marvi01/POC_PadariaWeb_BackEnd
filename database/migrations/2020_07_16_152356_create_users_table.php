@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriasTable extends Migration
+class CreateUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateCategoriasTable extends Migration
      */
     public function up()
     {
-        Schema::create('categoria', function (Blueprint $table) {
-            $table->increment('id');
-            $table->string('NomeCategoria');
-            $table->timestamps();
-        });
-    }
+        Schema::table('endereco', function (Blueprint $bp) {
+            $bp->integer('users_id')->unsigned();
+            $bp->foreign('users_id')->references('id')->on('users');
+         
 
+         });
+    }
     /**
      * Reverse the migrations.
      *
@@ -27,6 +27,6 @@ class CreateCategoriasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categoria');
+        Schema::dropIfExists('users');
     }
 }

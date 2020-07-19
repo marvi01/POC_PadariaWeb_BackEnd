@@ -5,19 +5,6 @@ Client ID: 2
 Client secret: IQgE0IWesQtKNJsloR8KuGjqL860goETAbwq0WWx
 
 //Client via Password
+ > usuario
 Client ID: 3
-Client secret: b4BJjEZoGkc6GV1XQIDIpcTIFnW4rIUo2KTtr6SA
-Client ID: 4
-Client secret: yR6mnpzu8os3XiFXJiorNWYdY8ZvemO2HiOZpxPj
-
- > marcos
-
-Password grant client created successfully.
-Client ID: 5
-Client secret: vTb8PXsJycfD7jSbeD4tKVLgMwi7SFDf4JGE4I77
-
- > luis@gmai.com
-
-Password grant client created successfully.
-Client ID: 6
-Client secret: ik7V8dfBGTCbr2pabyNL6WDsuLD2RzU0jc0GkUmm
+Client secret: bsCVjzZCefKl2T6NNw3whNCCWRePKchYwQVE4hfm
