@@ -20,7 +20,11 @@ class produtoController extends Controller
     public function index()
     {
         $produto = produto::all();
-        return response()->json($produto);
+        if($produto){
+        return response()->json(['data'=> $produto,'status'=>200]);
+        }else{
+        return response()->json(['data'=> 'Nenhum Produto encontrado','status'=>403]); 
+        }
     }
 
     /**
@@ -56,11 +60,11 @@ class produtoController extends Controller
     public function show($id)
     {
         $produto = produto::find($id);
-        if ($produto) {
-            return response()->json(['data'=> $produto]);
-       } else {
-           return response()->json(['Erro ao achar esse produto ']);
-       }
+        if($produto){
+            return response()->json(['data'=> $produto,'status'=>200]);
+            }else{
+            return response()->json(['data'=> 'Nenhum Produto encontrado','status'=>403]); 
+            }
     }
     /**
      * Show the form for editing the specified resource.

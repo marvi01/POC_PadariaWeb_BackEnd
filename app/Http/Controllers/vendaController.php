@@ -1,14 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Venda;
 use Illuminate\Http\Request;
-use App\Endereco;
 use Illuminate\Support\Facades\DB;
-
-class enderecoController extends Controller
+class vendaController extends Controller
 {
-    
     /**
      * Display a listing of the resource.
      *
@@ -21,18 +18,22 @@ class enderecoController extends Controller
 
     public function index()
     {
-        $endereco = endereco::all();
-        return response()->json($endereco);
+        $venda = Venda::all();
+        if($venda){
+        return response()->json(['data'=> $venda,'status'=>200]);
+        }else{
+        return response()->json(['data'=> 'Nenhum Compra encontrado','status'=>403]); 
+        }
     }
-    public function listEndereco($id){
-        $itens = DB::table('endereco')
+    public function listCompra($id){
+        $itens = DB::table('Compra')
                             ->select(DB::raw('*'))
                             ->where('users_id', '=', $id)
                             ->get();
         if(sizeof($itens) != null){
             return response()->json(['data'=>$itens, 'status'=>200]);
         }else{
-            return response()->json(['data'=>'Nenhum Endereço encontrado','status'=>403]);
+            return response()->json(['data'=>'Nenhum Pedido encontrado','status'=>403]);
         }
     }
 
@@ -49,12 +50,23 @@ class enderecoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function listVendaUser($id){
+        $itens = DB::table('Venda')
+                            ->select(DB::raw('*'))
+                            ->where('users_id', '=', $id)
+                            ->get();
+        if(sizeof($itens) != null){
+            return response()->json(['data'=>$itens, 'status'=>200]);
+        }else{
+            return response()->json(['data'=>'Nenhum Pedido encontrado','status'=>403]);
+        }
+    }
     public function store(Request $request)
     {
         $dados = $request->all();
-        $endereco = endereco::create($dados);
-        if ($endereco) {
-            return response()->json(['data'=> $endereco]);
+        $venda = Venda::create($dados);
+        if ($venda) {
+            return response()->json(['data'=> $venda]);
         } else {
             return response()->json(['data'=>'Erro ao criar uma categoria']);
         }
@@ -68,12 +80,12 @@ class enderecoController extends Controller
      */
     public function show($id)
     {
-        $endereco = endereco::find($id);
-        if ($endereco) {
-            return response()->json(['data'=> $endereco, 'status'=>200]);
-       } else {
-           return response()->json(['Erro ao achar esse endereco ', 'status'=>403]);
-       }
+        $venda = Venda::find($id);
+        if($venda){
+            return response()->json(['data'=> $venda,'status'=>200]);
+            }else{
+            return response()->json(['data'=> 'Nenhum Compra encontrado','status'=>403]); 
+            }
     }
     /**
      * Show the form for editing the specified resource.
@@ -95,14 +107,14 @@ class enderecoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $endereco = endereco::find($id);
+        $venda = Venda::find($id);
         $dados = $request->all();
         
-        if ($endereco) {
-            $endereco->update($dados);
-            return response()->json(['data'=>$endereco]);
+        if ($venda) {
+            $venda->update($dados);
+            return response()->json(['data'=>$venda]);
         } else {
-            return response()->json(['data'=>'Erro ao editar esse endereco']);
+            return response()->json(['data'=>'Erro ao editar esse Compra']);
     }
 }
     /**
@@ -113,12 +125,12 @@ class enderecoController extends Controller
      */
     public function destroy($id)
     {
-        $endereco = endereco::find($id);
-        if ($endereco) {
-            $endereco->delete();
-            return response()->json(['data'=>'endereco removida com sucesso']);
+        $venda = Venda::find($id);
+        if ($venda) {
+            $venda->delete();
+            return response()->json(['data'=>'Compra removida com sucesso']);
         } else {
-            return response()->json(['data'=>'Não foi possivel remover endereco']);
+            return response()->json(['data'=>'Não foi possivel remover Compra']);
         }
     }
 }
