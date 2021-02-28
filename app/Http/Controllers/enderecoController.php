@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Endereco;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class enderecoController extends Controller
 {
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +16,7 @@ class enderecoController extends Controller
      */
     public function __construct()
     {
-       // header('Access-Control-Allow-Origin*','*');
+        // header('Access-Control-Allow-Origin*','*');
     }
 
     public function index()
@@ -24,15 +24,16 @@ class enderecoController extends Controller
         $endereco = endereco::all();
         return response()->json($endereco);
     }
-    public function listEndereco($id){
+    public function listEndereco($id)
+    {
         $itens = DB::table('endereco')
-                            ->select(DB::raw('*'))
-                            ->where('users_id', '=', $id)
-                            ->get();
-        if(sizeof($itens) != null){
-            return response()->json(['data'=>$itens, 'status'=>200]);
-        }else{
-            return response()->json(['data'=>'Nenhum Endereço encontrado','status'=>403]);
+            ->select(DB::raw('*'))
+            ->where('users_id', '=', $id)
+            ->get();
+        if (sizeof($itens) != null) {
+            return response()->json(['data' => $itens, 'status' => 200]);
+        } else {
+            return response()->json(['data' => 'Nenhum Endereço encontrado', 'status' => 403]);
         }
     }
 
@@ -41,7 +42,6 @@ class enderecoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
 
     /**
      * Store a newly created resource in storage.
@@ -54,9 +54,9 @@ class enderecoController extends Controller
         $dados = $request->all();
         $endereco = endereco::create($dados);
         if ($endereco) {
-            return response()->json(['data'=> $endereco]);
+            return response()->json(['data' => $endereco]);
         } else {
-            return response()->json(['data'=>'Erro ao criar uma categoria']);
+            return response()->json(['data' => 'Erro ao criar um Endereço']);
         }
     }
 
@@ -70,10 +70,10 @@ class enderecoController extends Controller
     {
         $endereco = endereco::find($id);
         if ($endereco) {
-            return response()->json(['data'=> $endereco, 'status'=>200]);
-       } else {
-           return response()->json(['Erro ao achar esse endereco ', 'status'=>403]);
-       }
+            return response()->json(['data' => $endereco, 'status' => 200]);
+        } else {
+            return response()->json(['Erro ao achar esse endereco ', 'status' => 403]);
+        }
     }
     /**
      * Show the form for editing the specified resource.
@@ -97,14 +97,14 @@ class enderecoController extends Controller
     {
         $endereco = endereco::find($id);
         $dados = $request->all();
-        
+
         if ($endereco) {
             $endereco->update($dados);
-            return response()->json(['data'=>$endereco]);
+            return response()->json(['data' => $endereco]);
         } else {
-            return response()->json(['data'=>'Erro ao editar esse endereco']);
+            return response()->json(['data' => 'Erro ao editar esse endereco']);
+        }
     }
-}
     /**
      * Remove the specified resource from storage.
      *
@@ -116,9 +116,9 @@ class enderecoController extends Controller
         $endereco = endereco::find($id);
         if ($endereco) {
             $endereco->delete();
-            return response()->json(['data'=>'endereco removida com sucesso']);
+            return response()->json(['data' => 'endereco removido com sucesso']);
         } else {
-            return response()->json(['data'=>'Não foi possivel remover endereco']);
+            return response()->json(['data' => 'Não foi possivel remover endereco']);
         }
     }
 }

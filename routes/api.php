@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Route;
  */
 Route::resource('/Compra', 'compraController');
 Route::resource('/Venda', 'vendaController');
+Route::resource('/ProdutoCopy','produtoCopyController');
 Route::get('/VendaUser/{id}','vendaController@listVendaUser');
+Route::get('/Pedidos','vendaController@listPedidos');
+Route::put('/ConfirmPedido/{id}', 'vendaController@confirmarPedido');
+Route::get('/Vendas','vendaController@listVendas');
 Route::get('/CompraUser/{id}','compraController@listCompraUser');
 Route::get('/CompraVenda/{id}','compraController@compraShow');
 Route::get('/Produtos', 'produtoController@index');
@@ -35,6 +39,7 @@ Route::delete('/Produtos/{id}', 'produtoController@destroy');
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('/Produtos', 'produtoController@store');
     Route::get('users/{id}', 'UserController@seusDados');
+    Route::put('users/{id}', 'UserController@update');
     Route::post('/Endereco', 'enderecoController@store');
     Route::get('/EnderecoList/{id}', 'enderecoController@listEndereco');
     Route::put('/Endereco/{id}', 'enderecoController@update');

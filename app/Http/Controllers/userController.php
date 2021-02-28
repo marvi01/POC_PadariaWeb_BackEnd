@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-       // header('Access-Control-Allow-Origin*','*');
+        header('Access-Control-Allow-Origin *');
     }
     
     public function seusDados($id)
@@ -48,6 +48,7 @@ class UserController extends Controller
         $dados = $request->all();
         
         if ($User) {
+            
             $User->update($dados);
             return response()->json(['data'=>$User]);
         } else {

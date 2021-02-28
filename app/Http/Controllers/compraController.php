@@ -7,6 +7,7 @@ use App\Compra;
 use Illuminate\Support\Facades\DB;
 
 
+
 class compraController extends Controller
 {
     /**

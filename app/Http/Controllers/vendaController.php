@@ -61,6 +61,39 @@ class vendaController extends Controller
             return response()->json(['data'=>'Nenhum Pedido encontrado','status'=>403]);
         }
     }
+    public function listVendas(){
+        $itens = DB::table('Venda')
+                            ->select(DB::raw('*'))
+                            ->where('confirm', '=', 1)
+                            ->get();
+        if(sizeof($itens) != null){
+            return response()->json(['data'=>$itens, 'status'=>200]);
+        }else{
+            return response()->json(['data'=>'Nenhum Pedido encontrado','status'=>403]);
+        }
+    }
+    
+    public function listPedidos(){
+        $itens = DB::table('Venda')
+                            ->select(DB::raw('*'))
+                            ->where('confirm', '=', 0)
+                            ->get();
+        if(sizeof($itens) != null){
+            return response()->json(['data'=>$itens, 'status'=>200]);
+        }else{
+            return response()->json(['data'=>'Nenhum Pedido encontrado','status'=>403]);
+        }
+    }
+    
+    public function confirmarPedido($id){
+        $update = DB::table('venda')->where('id', '=' , $id)->update(['confirm'=>1]);
+        if($update != 0){
+         return response()->json(['data'=>'Pedido realizado com sucesso','status'=>200]);
+        }else{
+         return response()->json(['error'=>'Pedido ja confirmado','status'=>403]);
+        }
+         
+     }
     public function store(Request $request)
     {
         $dados = $request->all();
@@ -68,7 +101,7 @@ class vendaController extends Controller
         if ($venda) {
             return response()->json(['data'=> $venda]);
         } else {
-            return response()->json(['data'=>'Erro ao criar uma categoria']);
+            return response()->json(['data'=>'Erro ao criar uma venda']);
         }
     }
 

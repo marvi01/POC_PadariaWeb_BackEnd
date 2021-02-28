@@ -3,15 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\produto;
 
-class produtoController extends Controller
+use App\produtoCopy;
+class produtoCopyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
        // header('Access-Control-Allow-Origin*','*');
@@ -19,7 +14,7 @@ class produtoController extends Controller
 
     public function index()
     {
-        $produto = produto::all();
+        $produto = produtoCopy::all();
         if($produto){
         return response()->json(['data'=> $produto,'status'=>200]);
         }else{
@@ -43,7 +38,7 @@ class produtoController extends Controller
     public function store(Request $request)
     {
         $dados = $request->all();
-        $produto = produto::create($dados);
+        $produto = produtoCopy::create($dados);
         if ($produto) {
             return response()->json(['data'=> $produto]);
         } else {
@@ -59,7 +54,7 @@ class produtoController extends Controller
      */
     public function show($id)
     {
-        $produto = produto::find($id);
+        $produto = produtoCopy::find($id);
         if($produto){
             return response()->json(['data'=> $produto,'status'=>200]);
             }else{
@@ -86,7 +81,7 @@ class produtoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $produto = produto::find($id);
+        $produto = produtoCopy::find($id);
         $dados = $request->all();
         
         if ($produto) {
@@ -104,7 +99,7 @@ class produtoController extends Controller
      */
     public function destroy($id)
     {
-        $produto = produto::find($id);
+        $produto = produtoCopy::find($id);
         if ($produto) {
             $produto->delete();
             return response()->json(['data'=>'Produto removida com sucesso']);
